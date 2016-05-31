@@ -1,0 +1,19 @@
+---
+- name: Install LAMP
+  apt:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ wordpress_packages_dependencies }}"
+
+- name: Check if WordPress exists
+  become: no
+  stat:
+      path: "{{ wordpress_document_root }}"
+  register: check_wordpress
+
+- name: Download & Extract WordPress
+  unarchive:
+      src: "{{ wordpress_download_url }}"
+      dest: "{{ wordpress_html_document_root }}"
+      copy: no
+  when: not check_wordpress.stat.exists

@@ -1,0 +1,20 @@
+---
+- name: Change root document on Apache2
+  lineinfile:
+      dest: "{{ wordpress_php_config_file_path }}"
+      regexp: DocumentRoot .*
+      line: "      DocumentRoot {{ wordpress_document_root }}"
+  become: yes
+  notify: Restart Apache2
+
+- name: Create WordPress Database
+  mysql_db:
+      name: wordpress
+      state: present
+      login_user: root
+      login_password: "{{ wordpress_mysql_root_password }}"
+
+- name: Copy wp-config template
+  template:
+      src: wp-config.php.j2
+      dest: "{{ wordpress_document_root }}/wp-config.php"

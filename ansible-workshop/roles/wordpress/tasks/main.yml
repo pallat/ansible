@@ -1,0 +1,73 @@
+---
+- include: wordpress_pre.yml
+- include: wordpress_install.yml
+- include: wordpress_post.yml
+
+# - name: Echo Hello World
+#   shell: echo "Hello World"
+#
+# - name: Install Apache2
+#   apt: name=apache2 state=present
+#   become: yes
+#
+# - name: Install PHP5
+#   apt: name=php5 state=present
+#   become: yes
+#
+# - name: Install MySQL Server
+#   apt: name=mysql-server state=present
+#   become: yes
+
+##  refactor ##
+# - name: Install LAMP
+#   apt: name={{ item }} state=present
+#   with_items:
+#       - apache2
+#       - php5
+#       - mysql-server
+#   become: yes
+
+##  refactor ##
+    # - name: Install LAMP
+    #   apt:
+    #       name: "{{ item }}"
+    #       state: present
+    #   with_items: "{{ wordpress_packages_dependencies }}"
+    #   become: yes
+######## refactor to wordpress_install.yml
+
+
+# - name: Delete /var/www/html/index.html
+#   file:
+#       path: /var/www/html/index.html
+#       state: absent
+#   become: yes
+
+# - name: Download WrodPress
+#   get_url:
+#       url: https://wordpress.org/latest.tar.gz
+#       dest: /home/ubuntu/latest.tar.gz
+#       mode: 0777
+
+    # - name: Check if WordPress exists
+    #   stat:
+    #       path: "{{ wordpress_document_root }}"
+    #   register: check_wordpress
+    #
+    # - name: Download & Extract WordPress
+    #   unarchive:
+    #       src: "{{ wordpress_download_url }}"
+    #       dest: "{{ wordpress_html_document_root }}"
+    #       copy: no
+    #   when: not check_wordpress.stat.exists
+    #   become: yes
+######## refactor to wordpress_install.yml
+
+    # - name: Change root document on Apache2
+    #   lineinfile:
+    #       dest: "{{ wordpress_php_config_file_path }}"
+    #       regexp: DocumentRoot .*
+    #       line: "      DocumentRoot {{ wordpress_document_root }}"
+    #   become: yes
+    #   notify: Restart Apache2
+######## refactor to wordpress_post.yml

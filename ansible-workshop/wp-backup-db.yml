@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - wp-backup-db
+  # vars_files:
+  #   - "{{ playbook_dir }}/vars/wordpress.yml"

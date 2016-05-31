@@ -1,0 +1,7 @@
+---
+- name: Pre default password for MySQL Installing
+  debconf:
+      name: mysql-server
+      question: "{{ wordpress_debconf_question }}"
+      value: "{{ wordpress_mysql_root_password | quote }}"
+      vtype: password

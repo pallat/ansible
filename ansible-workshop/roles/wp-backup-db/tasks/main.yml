@@ -1,0 +1,13 @@
+---
+- name: Backup WordPress Database
+  mysql_db:
+      state: dump
+      name: all
+      login_user: "{{ wordpress_backup_mysql_root_user }}"
+      login_password: "{{ wordpress_backup_mysql_root_password }}"
+      target: "{{ wordpress_backup_server_path }}/{{ wordpress_backup_filename }}"
+
+- name: Fetch Backup Database file
+  fetch:
+      src: "{{ wordpress_backup_server_path }}/{{ wordpress_backup_filename }}"
+      dest: "{{ wordpress_backup_local_path }}/{{ wordpress_backup_filename }}"

@@ -1,0 +1,17 @@
+---
+wordpress_html_document_root: /var/www/html
+wordpress_document_root: "{{ wordpress_html_document_root }}/wordpress"
+wordpress_download_url: https://wordpress.org/latest.tar.gz
+wordpress_php_config_file_path: /etc/apache2/sites-available/000-default.conf
+wordpress_packages_dependencies:
+  - apache2
+  - php5
+  - php5-mysql
+  - mysql-server
+  - python-mysqldb
+wordpress_debconf_question:
+  - mysql-server/root_password
+  - mysql-server/root_password_again
+wordpress_mysql_root_user: root
+wordpress_mysql_root_password: mypass
+wordpress_database_name: wordpress

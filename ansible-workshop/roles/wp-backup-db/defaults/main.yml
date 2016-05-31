@@ -1,0 +1,7 @@
+---
+wordpress_backup_mysql_root_user: root
+wordpress_backup_mysql_root_password: mypass
+wordpress_backup_database_name: wordpress
+wordpress_backup_filename: wordpress.sql
+wordpress_backup_server_path: /tmp/
+wordpress_backup_local_path: /tmp/
